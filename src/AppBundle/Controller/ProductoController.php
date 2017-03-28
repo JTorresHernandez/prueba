@@ -13,68 +13,68 @@ use Symfony\Component\HttpFoundation\Request;
 class PostController extends Controller
 {
    /**
-    * @Route (path="/", name="app_posts_lista")
+    * @Route (path="/", name="app_productos_lista")
     */
 
    public function IndexAction()
    {
        $m = $this->getDoctrine()->getManager();
-       $repo = $m->getRepository('AppBundle:Post');
+       $repo = $m->getRepository('AppBundle:Producto');
 
        $m->flush();
-       $posts = $repo->findAll();
-       return $this->render(':posts:lista.html.twig',
+       $productos = $repo->findAll(); //producto?
+       return $this->render(':producto-template:lista.html.twig',
            [
-               'posts' => $posts
+               'producto-template' => $productos
            ]);
    }
 
     /**
      * @Route (path="/add",
-     * name="app_posts_add")
+     * name="app_productos_add")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
      */
 
     public function AddAction()
     {
-        $Post = new Post();
-        $form = $this->createForm(PostType::class, $Post);
+        $Producto = new Producto();
+        $form = $this->createForm(PostType::class, $Producto);
 
-        return $this->render(':posts:form.html.twig',
+        return $this->render(':producto-template:form.html.twig',
             [
                 'form'  => $form->createView(),
-                'action'  => $this->generateUrl('app_posts_doAdd'),
+                'action'  => $this->generateUrl('app_productos_doAdd'),
             ]);
     }
 
     /**
      * @Route (path="/doadd",
-     *      name="app_posts_doAdd")
+     *      name="app_productos_doAdd")
      * @Security("has_role('ROLE_USER')")
      */
 
     public function doAddAction(Request $request)
     {
 
-        $Post= new Post();
-        $form = $this->createForm(PostType::class, $Post);
+        $Producto= new Post();
+        $form = $this->createForm(PostType::class, $Producto);
 
         $form->handleRequest($request);
 
         if($form->isValid()) {
             $user = $this->getUser();
-            $Post->setAuthor($user);
+            $Producto->setAuthor($user);
             $m = $this->getDoctrine()->getManager();
-            $m->persist($Post);
+            $m->persist($Producto);
             $m->flush();
 
             return $this->redirectToRoute('app_index_index');
         }
-            return $this->render(':posts:form.html.twig',
+            return $this->render(':producto-template:form.html.twig',
                  [
                      'form'  => $form->createView(),
-                     'action'  => $this->generateUrl('app_posts_doAdd')
+                     'action'  => $this->generateUrl('app_productos_doAdd')
                  ]);
 
     }
@@ -82,7 +82,7 @@ class PostController extends Controller
     /**
      * @Route (
      *     path="/update/{id}",
-     *     name="app_posts_update"
+     *     name="app_productos_update"
      * )
      * @Security("has_role('ROLE_USER')")
      */
@@ -92,21 +92,21 @@ class PostController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Post');
 
-        $Post = $repo->find($id);
+        $Producto = $repo->find($id);
 
-        $form = $this->createForm(PostType::class, $Post);
+        $form = $this->createForm(PostType::class, $Producto);
 
-        return $this->render(':posts:form.html.twig',
+        return $this->render(':producto-template:form.html.twig',
             [
                 'form' => $form->CreateView(),
-                'action' => $this->generateUrl('app_posts_doUpdate', ['id' => $id]),
+                'action' => $this->generateUrl('app_productos_doUpdate', ['id' => $id]),
             ]);
     }
 
     /**
      * @Route (
      *     path="/doUpdate/{id}",
-     *     name="app_posts_doUpdate")
+     *     name="app_productos_doUpdate")
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -116,9 +116,9 @@ class PostController extends Controller
     public function doUpdateAction($id, Request $request)
     {
         $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Post');
-        $Post = $repo->find($id);
-        $form = $this->createForm(PostType::class, $Post);
+        $repo = $m->getRepository('AppBundle:Producto');
+        $Producto = $repo->find($id);
+        $form = $this->createForm(PostType::class, $Producto);
 
         $form->handleRequest($request);
         if($form->isValid()){
@@ -127,10 +127,10 @@ class PostController extends Controller
             return $this->redirectToRoute('app_index_index');
         }
 
-        return $this->render(':posts:form.html.twig',
+        return $this->render(':producto-template:form.html.twig',
             [
                 'form' => $form->CreateView(),
-                'action' => $this->generateUrl('app_posts_doUpdate', ['id' => $id]),
+                'action' => $this->generateUrl('app_productos_doUpdate', ['id' => $id]),
             ]);
 
     }
@@ -138,7 +138,7 @@ class PostController extends Controller
     /**
      * @Route (
      *     path="/remove/{id}",
-     *     name="app_posts_remove"
+     *     name="app_productos_remove"
      * )
      * @Security("has_role('ROLE_USER')")
      */
@@ -146,10 +146,10 @@ class PostController extends Controller
     public function removeAction($id)
     {
         $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Post');
+        $repo = $m->getRepository('AppBundle:Producto');
 
-        $Post = $repo->find($id);
-        $m->remove($Post);
+        $Producto = $repo->find($id);
+        $m->remove($Producto);
         $m->flush();
 
         $this->addFlash('messages', 'Post Deleted');
