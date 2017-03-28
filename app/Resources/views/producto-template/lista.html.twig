@@ -2,23 +2,24 @@
 
 {% block title %} Productos {% endblock %}
 {% block body %}
-<h1> Productos</h1>
+<h1 style="text-decoration: underline;"> Productos</h1>
 {% for producto in productos %}
 
-<tr>
-    <td>{{ producto.id }}</td> <br>
-    <b>Autor:</b> <td>{{ producto.author }}</td> <br>
-    <b>Titulo:</b> <td>{{ producto.title }}</td> <br>
-    <b>Tipo:</b> <td>{{ producto.type }}</td> <br>
-    <b>Contenido:</b> <br> <td>{{ producto.content }}</td> <br>
+<br>
+    <b style="margin-left:80%; font-size: 18px; color: green;">Autor:</b> <td style="margin-left:85%;">{{ producto.author }}</td> <br>
+    <b style="color: #101010">Titulo:</b> <td>{{ producto.title }}</td> <br>
+    <b style="color: #101010">Tipo:</b> <td>{{ producto.type }}</td> <br>
+    <b style="color: #101010">Contenido:</b> <br> <td>{{ producto.content }}</td> <br></br>
+
+    <b style="color: #101010">Fecha de creacion:</b><br>
     <td>{{ producto.createdAt|date('d/m/Y H:i:s') }}</td> <br>
-    <td>{{ producto.updatedAt|date('d/m/Y H:i:s') }}</td> <br>
-    <td><a href="{{ path('app_productos_update', {'id': producto.id}) }}" style="color: #101010">actualizar</a> </td>
-    <td><a href="{{ path('app_productos_remove', {'id': producto.id}) }}" style="color: #101010">eliminar</a> </td> <br>
+    <td>{{ producto.updatedAt|date('d/m/Y H:i:s') }}</td> <br></br>
+    <td><a href="{{ path('app_productos_update', {'id': producto.id}) }}" style=" border: 2px solid lightslategray;  color: #101010">Actualizar</a> </td>
+    <td><a href="{{ path('app_productos_remove', {'id': producto.id}) }}" style="color: #101010; border: 2px solid lightslategray">Eliminar</a> </td> <br>
 </tr>
 {% endfor %}
 
 <div style="margin-top: 10px">
-    <a href="{{ path('app_productos_add') }}" style="color: #101010">Nuevo producto</a>
+    <a href="{{ path('app_productos_add') }}" style="color: darkblue">Nuevo producto</a>
 </div>
 {% endblock %}
