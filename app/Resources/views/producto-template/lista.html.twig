@@ -1,23 +1,24 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} Posts {% endblock %}
+{% block title %} Productos {% endblock %}
 {% block body %}
-<h1> Posts</h1>
-{% for post in posts %}
+<h1> Productos</h1>
+{% for producto in productos %}
 
 <tr>
-    <td>{{ post.id }}</td> <br>
-    <b>Autor:</b> <td>{{ post.author }}</td> <br>
-    <b>Titulo:</b> <td>{{ post.title }}</td> <br>
-    <b>Contenido:</b> <br> <td>{{ post.content }}</td> <br>
-    <td>{{ post.createdAt|date('d/m/Y H:i:s') }}</td> <br>
-    <td>{{ post.updatedAt|date('d/m/Y H:i:s') }}</td> <br>
-    <td><a href="{{ path('app_posts_update', {'id': post.id}) }}" style="color: #101010">actualizar</a> </td>
-    <td><a href="{{ path('app_posts_remove', {'id': post.id}) }}" style="color: #101010">eliminar</a> </td> <br>
+    <td>{{ producto.id }}</td> <br>
+    <b>Autor:</b> <td>{{ producto.author }}</td> <br>
+    <b>Titulo:</b> <td>{{ producto.title }}</td> <br>
+    <b>Tipo:</b> <td>{{ producto.type }}</td> <br>
+    <b>Contenido:</b> <br> <td>{{ producto.content }}</td> <br>
+    <td>{{ producto.createdAt|date('d/m/Y H:i:s') }}</td> <br>
+    <td>{{ producto.updatedAt|date('d/m/Y H:i:s') }}</td> <br>
+    <td><a href="{{ path('app_productos_update', {'id': producto.id}) }}" style="color: #101010">actualizar</a> </td>
+    <td><a href="{{ path('app_productos_remove', {'id': producto.id}) }}" style="color: #101010">eliminar</a> </td> <br>
 </tr>
 {% endfor %}
 
 <div style="margin-top: 10px">
-    <a href="{{ path('app_posts_add') }}" style="color: #101010">Nuevo post</a>
+    <a href="{{ path('app_productos_add') }}" style="color: #101010">Nuevo producto</a>
 </div>
 {% endblock %}

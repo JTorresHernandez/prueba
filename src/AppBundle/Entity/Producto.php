@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
+ * @ORM\Table(name="producto")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductoRepository")
  */
-class Post
+class Producto
 {
     /**
      * @var int
@@ -26,7 +26,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="author", type="string", length=255, unique=true)
-     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="post")
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="producto")
      */
     private $author;
 
@@ -37,6 +37,14 @@ class Post
      */
 
     private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
 
     /**
      * @var string
@@ -81,7 +89,7 @@ class Post
      *
      * @param string $author
      *
-     * @return Post
+     * @return Producto
      */
     public function setAuthor($author)
     {
@@ -124,7 +132,7 @@ class Post
      *
      * @param string $content
      *
-     * @return Post
+     * @return Producto
      */
     public function setContent($content)
     {
@@ -143,12 +151,34 @@ class Post
         return $this->content;
     }
 
+
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+
+
+
+
     /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
-     * @return Post
+     * @return Producto
      */
     public function setCreatedAt($createdAt)
     {
@@ -172,7 +202,7 @@ class Post
      *
      * @param \DateTime $updatedAt
      *
-     * @return Post
+     * @return Producto
      */
     public function setUpdatedAt($updatedAt)
     {

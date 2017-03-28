@@ -33,7 +33,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Producto", mappedBy="author")
      *
      */
 

@@ -6,6 +6,6 @@ app.index:
     type: annotation
 
 app.post:
-    resource: "@AppBundle/Controller/PostController.php"
+    resource: "@AppBundle/Controller/ProductoController.php"
     type: annotation
     prefix: /lista

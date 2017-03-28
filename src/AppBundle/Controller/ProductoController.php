@@ -2,15 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Producto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Post;
-use AppBundle\Form\PostType;
+use AppBundle\Form\ProductoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PostController extends Controller
+class ProductoController extends Controller
 {
    /**
     * @Route (path="/", name="app_productos_lista")
@@ -22,10 +22,10 @@ class PostController extends Controller
        $repo = $m->getRepository('AppBundle:Producto');
 
        $m->flush();
-       $productos = $repo->findAll(); //producto?
+       $productos = $repo->findAll();
        return $this->render(':producto-template:lista.html.twig',
            [
-               'producto-template' => $productos
+               'productos' => $productos
            ]);
    }
 
@@ -39,7 +39,7 @@ class PostController extends Controller
     public function AddAction()
     {
         $Producto = new Producto();
-        $form = $this->createForm(PostType::class, $Producto);
+        $form = $this->createForm(ProductoType::class, $Producto);
 
         return $this->render(':producto-template:form.html.twig',
             [
@@ -57,8 +57,8 @@ class PostController extends Controller
     public function doAddAction(Request $request)
     {
 
-        $Producto= new Post();
-        $form = $this->createForm(PostType::class, $Producto);
+        $Producto= new Producto();
+        $form = $this->createForm(ProductoType::class, $Producto);
 
         $form->handleRequest($request);
 
@@ -90,11 +90,11 @@ class PostController extends Controller
     public function updateAction($id)
     {
         $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Post');
+        $repo = $m->getRepository('AppBundle:Producto');
 
         $Producto = $repo->find($id);
 
-        $form = $this->createForm(PostType::class, $Producto);
+        $form = $this->createForm(ProductoType::class, $Producto);
 
         return $this->render(':producto-template:form.html.twig',
             [
@@ -118,7 +118,7 @@ class PostController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Producto');
         $Producto = $repo->find($id);
-        $form = $this->createForm(PostType::class, $Producto);
+        $form = $this->createForm(ProductoType::class, $Producto);
 
         $form->handleRequest($request);
         if($form->isValid()){
@@ -152,7 +152,7 @@ class PostController extends Controller
         $m->remove($Producto);
         $m->flush();
 
-        $this->addFlash('messages', 'Post Deleted');
+        $this->addFlash('messages', 'Producto Eliminado');
 
         return $this->redirectToRoute('app_index_index');
 

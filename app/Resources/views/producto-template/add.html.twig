@@ -1,13 +1,15 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} Posts {% endblock %}
+{% block title %} Productos {% endblock %}
 {% block body %}
 
-    <h1> Añadir Posts</h1>
+    <h1> Añadir Productos</h1>
 
-    <form method="post" action="{{ path('app_posts_doAdd') }}">
+    <form method="producto" action="{{ path('app_productos_doAdd') }}">
         Titulo: <input type="text" name="title" /> </br>
-        Contenido: <textarea type="text" name="content" /> </br>
+        Tipo: <input type="text" name="type" /> </br>
+        Descripcion: <textarea type="text" name="content" /> </br>
+
         <input type= "submit" value="crear"/>
     </form>
 
